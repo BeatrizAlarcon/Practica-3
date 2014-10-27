@@ -59,17 +59,68 @@
 describe("Clase GameBoard", function(){
   it("Gameboard.add", function() {
 
-  var gameBoard = new GameBoard();
+    var gameBoard = new GameBoard();
 
-  //espero que lo que devuelva sea el objeto introducido
-  expect(gameBoard.add(1)).toEqual(1);
-  expect(gameBoard.add(2)).toEqual(2);
+    //espero que lo que devuelva sea el objeto introducido
+    expect(gameBoard.add(1)).toEqual(1);
+    expect(gameBoard.add(2)).toEqual(2);
 
-  //espero que se haya añadido el objeto introducido
-  expect(gameBoard.objects[0]).toEqual[1];
-  expect(gameBoard.objects[1]).toEqual[2];
+    //espero que se haya añadido el objeto introducido
+    expect(gameBoard.objects[0]).toEqual[1];
+    expect(gameBoard.objects[1]).toEqual[2];
   });
 
+  it("Gameboard.remove", function(){
+    var gameBoard = new GameBoard();
+    //comprubebo que se llama a resetRemoved
+    spyOn(gameBoard, "resetRemoved").andCallThrough();
+    gameBoard.resetRemoved();
+    expect(gameBoard.resetRemoved).toHaveBeenCalled();
+    //compruebo que elimina
+    gameBoard.add(1);
+    gameBoard.add(8);
+    gameBoard.remove(8);
+    gameBoard.remove(1);
+    expect(gameBoard.removed[0]).toEqual(8);
+    expect(gameBoard.removed[1]).toEqual(1);
+  });
+
+  it("Gameboard.resetRemoved", function(){
+    var gameBoard = new GameBoard();
+    expect(gameBoard.resetRemoved()).toEqual();
+  });
+
+  it("Gameboard.finalizeRemoved",function(){
+    var gameBoard = new GameBoard();
+
+    //comprubebo que se llama a resetRemoved
+    spyOn(gameBoard, "resetRemoved").andCallThrough();
+    gameBoard.resetRemoved();
+    expect(gameBoard.resetRemoved).toHaveBeenCalled();
+
+    gameBoard.add(1);
+    gameBoard.add(8);
+    expect(gameBoard.objects[0]).toEqual(1);
+    expect(gameBoard.objects[1]).toEqual(8);
+    gameBoard.remove(8);
+    expect(gameBoard.removed[0]).toEqual(8);
+    expect(gameBoard.objects[0]).toEqual(1);
+    expect(gameBoard.objects[1]).toEqual(8);
+
+    gameBoard.finalizeRemoved();
+    expect(gameBoard.removed[0]).toEqual(8);
+    expect(gameBoard.objects[0]).toEqual(1);
+    expect(gameBoard.objects[1]).toEqual(undefined);
+
+    gameBoard.remove(1);
+    expect(gameBoard.removed[1]).toEqual(1);
+
+    gameBoard.finalizeRemoved();
+    expect(gameBoard.objects[0]).toEqual(undefined);
+    expect(gameBoard.objects[1]).toEqual(undefined);
+  });
 });
+
+
 
 
