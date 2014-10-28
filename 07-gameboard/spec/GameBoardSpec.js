@@ -119,6 +119,75 @@ describe("Clase GameBoard", function(){
     expect(gameBoard.objects[0]).toEqual(undefined);
     expect(gameBoard.objects[1]).toEqual(undefined);
   });
+
+  it("Gameboard.iterate",function(){
+    var gameBoard = new GameBoard();
+    //genero dummys con la función que necesito
+    var dummy1 ={
+      funcion: function(){}
+    };
+    var dummy2 ={
+      funcion: function(){}
+    };
+
+    //espio su función
+    spyOn(dummy1,"funcion");
+    spyOn(dummy2,"funcion");
+
+    //los añado al gameboard
+    gameBoard.add(dummy1);
+    gameBoard.add(dummy2);
+    
+    //itero sobre ellos para asegurarme que lo que hacen es llamar a su función con el parámetro que se le ha pasado
+    gameBoard.iterate('funcion', 'hola');
+    expect(dummy1.funcion).toHaveBeenCalledWith('hola');
+    expect(dummy2.funcion).toHaveBeenCalledWith('hola');
+
+  });
+
+    
+
+  it("Gameboard.detect",function(){
+    var gameBoard = new GameBoard();
+    gameBoard.objects = [{att1:1},{att2:2}];
+
+    //funcion verdadero si att1 es 1
+    var func1 = function(){
+      return this.att1==1;
+    };
+
+    //funcion verdadero si att2 es 1
+    var func2 = function(){
+      return this.att2==1;
+    };
+
+    expect(gameBoard.detect(func1)).toBe(gameBoard.objects[0]);
+    expect(gameBoard.detect(func2)).toBe(false);
+  });
+
+  it("Gameboard.step",function(){
+    var gameBoard = new GameBoard();
+    var dt = 30 / 1000;
+
+    spyOn(gameBoard, "resetRemoved");
+    spyOn(gameBoard, "iterate");
+    spyOn(gameBoard, "finalizeRemoved");
+
+    gameBoard.step(dt);
+
+    expect(gameBoard.resetRemoved).toHaveBeenCalled;
+    expect(gameBoard.iterate).toHaveBeenCalledWith('step',dt);
+    expect(gameBoard.finalizeRemoved).toHaveBeenCalled;
+  });
+
+  it("Gameboard.draw",function(){
+  });
+
+  it("Gameboard.overlap",function(){
+  });
+
+  it("Gameboard.collide",function(){
+  });
 });
 
 
