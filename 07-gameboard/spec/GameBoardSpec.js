@@ -57,6 +57,24 @@
 
 */
 describe("Clase GameBoard", function(){
+
+  var canvas, ctx;
+
+  beforeEach(function(){
+  loadFixtures('index.html');
+
+  canvas = $('#game')[0];
+  expect(canvas).toExist();
+
+  ctx = canvas.getContext('2d');
+  expect(ctx).toBeDefined();
+  
+  oldGame = Game;
+    });
+
+    afterEach(function(){
+  Game = oldGame;
+    }); 
   it("Gameboard.add", function() {
 
     var gameBoard = new GameBoard();
@@ -181,6 +199,11 @@ describe("Clase GameBoard", function(){
   });
 
   it("Gameboard.draw",function(){
+    var gameBoard = new GameBoard();
+    spyOn(gameBoard, "iterate");
+    
+    gameBoard.draw(ctx);
+    expect(gameBoard.iterate).toHaveBeenCalledWith('draw',ctx);
   });
 
   it("Gameboard.overlap",function(){
