@@ -207,9 +207,30 @@ describe("Clase GameBoard", function(){
   });
 
   it("Gameboard.overlap",function(){
+    var gameBoard = new GameBoard();
+    //objeto base
+    var base = {x: 0, y:0, h:20, w:20};
+    var sol = {x: 5, y:5, h:3, w:3};
+    var nosol = {x: 21, y:21, h:3, w:3};
+    //solape
+    expect(gameBoard.overlap(base, sol)).toBeTruthy();
+    //no solape
+    expect(gameBoard.overlap(base, nosol)).toBeFalsy();
   });
 
   it("Gameboard.collide",function(){
+    var gameBoard = new GameBoard();
+    var base = {x:0, y:0, h:20, w:20, type:0};
+    var col = {x:5, y:5, h:3, w:3, type:1};
+    var nocol = {x:21, y:21 , h:3 , w:3, type:2};
+
+    gameBoard.add(base);
+    gameBoard.add(col);
+    gameBoard.add(nocol);
+
+    expect(gameBoard.collide(base,col.type)).toBe(col);
+    expect(gameBoard.collide(base,nocol.type)).toBeFalsy;
+  
   });
 });
 
