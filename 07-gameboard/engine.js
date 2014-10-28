@@ -8,7 +8,8 @@
 // (jugador, enemigo, proyectiles, y los elementos como el marcador de
 // puntuación o el número de vidas.
 
-
+//implementación con underscore
+var _;
 
 
 // Objeto singleton Game: se guarda una unica instancia del
@@ -53,7 +54,7 @@ var Game = new function() {
     }
 
 
-    // Bucle del juego
+    // Bucle del juego Game.loop
     var boards = [];
 
     this.loop = function() { 
@@ -135,7 +136,7 @@ var TitleScreen = function TitleScreen(title,subtitle,callback) {
 
     // En cada paso, comprobamos si la tecla ha pasado de no pulsada a
     // pulsada. Si comienza el juego con la tecla pulsada, hay que
-    // soltarla y
+    // soltarla y volverla a pulsar
     this.step = function(dt) {
 	if(!Game.keys['fire']) up = true;
 	if(up && Game.keys['fire'] && callback) callback();
@@ -207,12 +208,14 @@ var GameBoard = function() {
     // objetos de objects
     this.iterate = function(funcName) {
 	// Convertimos en un array args (1..)
-	var args = Array.prototype.slice.call(arguments,1);
+	   var args = Array.prototype.slice.call(arguments,1);
 
-	for(var i=0, len=this.objects.length; i<len;i++) {
+	/*for(var i=0, len=this.objects.length; i<len;i++) {
 	    var obj = this.objects[i];
 	    obj[funcName].apply(obj,args)
-	}
+	}*/
+
+        _(this.objects).each(function(obj){obj[funcName].apply(obj,args)});
     };
 
     // Devuelve el primer objeto de objects para el que func es true
