@@ -82,7 +82,18 @@ var canvas, ctx;
   });
 
   it("PlayerMissile.draw",function(){
+    SpriteSheet= {
+      draw: function(a, b, c, d){}
+    };
+    SpriteSheet.map = {
+      missile: {w:2, h:10} 
+    };
+    ctx ={};
+    var playerMissile = new PlayerMissile(10,20);
+    spyOn(SpriteSheet, "draw");
 
+    playerMissile.draw(ctx);
+    expect(SpriteSheet.draw).toHaveBeenCalledWith(ctx,'missile',playerMissile.x, playerMissile.y)
   });
 
 
