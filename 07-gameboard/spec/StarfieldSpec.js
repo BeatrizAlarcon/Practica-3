@@ -34,34 +34,34 @@ describe("Clase Starfield", function(){
 	
 	sf1.draw(ctx);
 	
- 	expect(ctx.drawImage.calls[0].args[1]).toBe(0);
- 	expect(ctx.drawImage.calls[0].args[2]).toBe(0);
- 	expect(ctx.drawImage.calls[0].args[3]).toBe(320);
- 	expect(ctx.drawImage.calls[0].args[4]).toBe(480);
- 	expect(ctx.drawImage.calls[0].args[5]).toBe(0);
- 	expect(ctx.drawImage.calls[0].args[6]).toBe(0);
- 	expect(ctx.drawImage.calls[0].args[7]).toBe(320);
- 	expect(ctx.drawImage.calls[0].args[8]).toBe(480);
+ 	expect(ctx.drawImage.calls[0].args[1]).toBe(0); //0
+ 	expect(ctx.drawImage.calls[0].args[2]).toBe(0); //0
+ 	expect(ctx.drawImage.calls[0].args[3]).toBe(320); //stars.width = 320
+ 	expect(ctx.drawImage.calls[0].args[4]).toBe(480); //remaining = stars.height - intOffset como intOffset = 0 =>480 
+ 	expect(ctx.drawImage.calls[0].args[5]).toBe(0); //0
+ 	expect(ctx.drawImage.calls[0].args[6]).toBe(0); //int offset =0
+ 	expect(ctx.drawImage.calls[0].args[7]).toBe(320); //stars.width = 320
+ 	expect(ctx.drawImage.calls[0].args[8]).toBe(480); //remaining = 480
 
 	sf1.step(1); // dt = 1, así offset == dt*speed == 1*1 == 1
 	sf1.draw(ctx);
- 	expect(ctx.drawImage.calls[1].args[1]).toBe(0);
- 	expect(ctx.drawImage.calls[1].args[2]).toBe(479);
-  	expect(ctx.drawImage.calls[1].args[3]).toBe(320);
-  	expect(ctx.drawImage.calls[1].args[4]).toBe(1);
-  	expect(ctx.drawImage.calls[1].args[5]).toBe(0);
-  	expect(ctx.drawImage.calls[1].args[6]).toBe(0);
-  	expect(ctx.drawImage.calls[1].args[7]).toBe(320);
-  	expect(ctx.drawImage.calls[1].args[8]).toBe(1);
+ 	expect(ctx.drawImage.calls[1].args[1]).toBe(0); //0
+ 	expect(ctx.drawImage.calls[1].args[2]).toBe(479); //remaining = stars.height - intOffset = 479
+  	expect(ctx.drawImage.calls[1].args[3]).toBe(320); //stars.width = 320
+  	expect(ctx.drawImage.calls[1].args[4]).toBe(1); //intoffset =1
+  	expect(ctx.drawImage.calls[1].args[5]).toBe(0); //0
+  	expect(ctx.drawImage.calls[1].args[6]).toBe(0); //0
+  	expect(ctx.drawImage.calls[1].args[7]).toBe(320); //stars.width = 320
+  	expect(ctx.drawImage.calls[1].args[8]).toBe(1); //intoffset =1
 
- 	expect(ctx.drawImage.calls[2].args[1]).toBe(0);
- 	expect(ctx.drawImage.calls[2].args[2]).toBe(0);
-  	expect(ctx.drawImage.calls[2].args[3]).toBe(320);
-  	expect(ctx.drawImage.calls[2].args[4]).toBe(479);
-  	expect(ctx.drawImage.calls[2].args[5]).toBe(0);
-  	expect(ctx.drawImage.calls[2].args[6]).toBe(1);
-  	expect(ctx.drawImage.calls[2].args[7]).toBe(320);
-  	expect(ctx.drawImage.calls[2].args[8]).toBe(479);
+ 	expect(ctx.drawImage.calls[2].args[1]).toBe(0); //0
+ 	expect(ctx.drawImage.calls[2].args[2]).toBe(0); //0
+  	expect(ctx.drawImage.calls[2].args[3]).toBe(320); //stars.width = 320
+  	expect(ctx.drawImage.calls[2].args[4]).toBe(479); //remaining = stars.height - intOffset = 479
+  	expect(ctx.drawImage.calls[2].args[5]).toBe(0); //0
+  	expect(ctx.drawImage.calls[2].args[6]).toBe(1); //intoffset =1
+  	expect(ctx.drawImage.calls[2].args[7]).toBe(320); //stars.width = 320
+  	expect(ctx.drawImage.calls[2].args[8]).toBe(479); //remaining = stars.height - intOffset = 479
 
     });
 

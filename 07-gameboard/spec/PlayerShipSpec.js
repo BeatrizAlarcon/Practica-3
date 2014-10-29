@@ -57,7 +57,7 @@ describe("Clase PlayerShip", function(){
 
 	// Necesitamos tener Game.width y Game.height para que el
 	// constructor de PlayerShip pueda inicializar x e y.  Y
-	// necesitamos Geame.keys para saber si se ha pulsado una
+	// necesitamos Game.keys para saber si se ha pulsado una
 	// tecla
 	Game = {width: 320, height: 480, keys: {'left': false, 'right': false}};
 	

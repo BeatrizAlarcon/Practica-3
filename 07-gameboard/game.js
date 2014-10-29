@@ -14,7 +14,9 @@ var startGame = function() {
 
 var playGame = function() {
   var board = new GameBoard();
+  //add la nave del usuario al gameboard
   board.add(new PlayerShip());
+  //add el gameboard al juego, es decir add el nuevo tablero
   Game.setBoard(3,board);
 }
 
